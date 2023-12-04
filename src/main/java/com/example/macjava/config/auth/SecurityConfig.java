@@ -57,6 +57,7 @@ public class SecurityConfig {
                         .requestMatchers("/storage/**").permitAll()
                         // Productos
                         .requestMatchers("/productos/**").permitAll()
+                        .requestMatchers("/restaurant/**").permitAll()
                         // Otras rutas de la API podemos permitiras o no....
                         .requestMatchers("/" + apiVersion + "/**").permitAll()
                         // Podríamos jugar con permismos por ejemplo para una ruta concreta

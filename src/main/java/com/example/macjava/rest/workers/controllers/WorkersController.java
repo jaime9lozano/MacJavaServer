@@ -99,7 +99,7 @@ public class WorkersController {
             @ApiResponse(responseCode = "201", description = "OK"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    @PostMapping("worker")
+    @PostMapping("/worker")
     public ResponseEntity<WorkersResponseDto> createWorker(@Valid @RequestBody WorkersSaveDto worker){
         log.info("Guardando Empleado con dni: " + worker.getDni());
         return ResponseEntity.ok(WorkersMapper.toWorkersResponseDto(workersService.save(worker)));
@@ -115,7 +115,7 @@ public class WorkersController {
             @ApiResponse(responseCode = "400", description = "Bad Request"),
             @ApiResponse(responseCode = "404", description = "Not Found")
     })
-    @PutMapping("worker/{uuid}")
+    @PutMapping("/worker/{uuid}")
     public ResponseEntity<WorkersResponseDto> updateWorker(@PathVariable UUID uuid, @Valid @RequestBody WorkersUpdateDto worker){
         log.info("Actualizando Empleado con UUID: " + uuid);
         return ResponseEntity.ok(WorkersMapper.toWorkersResponseDto(workersService.update(uuid, worker)));
@@ -130,7 +130,7 @@ public class WorkersController {
             @ApiResponse(responseCode = "404", description = "Not Found")
     })
     @Transactional
-    @DeleteMapping("worker/{uuid}")
+    @DeleteMapping("/worker/{uuid}")
     public void deleteByUUID(@PathVariable UUID uuid){
         log.info("Eliminando Empleado con UUID: " + uuid);
         workersService.deleteByUUID(uuid);

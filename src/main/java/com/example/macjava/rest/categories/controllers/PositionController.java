@@ -93,7 +93,7 @@ public class PositionController {
             @ApiResponse(responseCode = "201", description = "Creado"),
             @ApiResponse(responseCode = "400", description = "Error de validacion")
     })
-    @PostMapping("position")
+    @PostMapping("/position")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity <PositionResponseDto> createPosition(@Valid @RequestBody PositionSaveDto position){
         log.info("Guardando Posicion con nombre: " + position.getName());
@@ -109,7 +109,7 @@ public class PositionController {
             @ApiResponse(responseCode = "400", description = "Error de validacion"),
             @ApiResponse(responseCode = "404", description = "No encontrado")
     })
-    @PutMapping("position/{id}")
+    @PutMapping("/position/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<PositionResponseDto> updatePosition(@PathVariable Long id, @Valid @RequestBody PositionUpdateDto position){
         log.info("Actualizando Posicion con id: " + id);
@@ -124,7 +124,7 @@ public class PositionController {
             @ApiResponse(responseCode = "200", description = "Eliminado"),
             @ApiResponse(responseCode = "404", description = "No encontrado")
     })
-    @DeleteMapping("position/{id}")
+    @DeleteMapping("/position/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public void deletePosition(@PathVariable Long id){
         log.info("Eliminando Posicion con Id: " + id);
@@ -139,7 +139,7 @@ public class PositionController {
             @ApiResponse(responseCode = "200", description = "Actualizado"),
             @ApiResponse(responseCode = "404", description = "No encontrado")
     })
-    @PutMapping("position/isDeleted/{id}")
+    @PutMapping("/position/isDeleted/{id}")
     public void updateIsDeletedToTrueById(@PathVariable Long id){
         log.info("Actualizando a TRUE isDeleted de la Posición con el id: " + id);
         positionService.updateIsDeletedToTrueById(id);
