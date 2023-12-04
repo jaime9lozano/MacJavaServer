@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -55,16 +56,19 @@ public class RestaurantController {
     }
 
     @PostMapping("/restaurant")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Restaurant> createRestaurant(@Valid @RequestBody NewRestaurantDTO restaurantDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(restaurantDTO));
     }
 
     @PutMapping("/restaurant/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long id, @Valid @RequestBody UpdatedRestaurantDTO restaurantDTO){
         return ResponseEntity.ok(service.update(id, restaurantDTO));
     }
 
     @DeleteMapping("/restaurant/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteRestaurant(@PathVariable Long id){
         service.deleteById(id);
         return ResponseEntity.noContent().build();
