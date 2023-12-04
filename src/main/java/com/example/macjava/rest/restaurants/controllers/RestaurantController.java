@@ -25,6 +25,7 @@ import java.util.Optional;
  * Se usa el repositorio de la clase y se inyecta mediante la anotacion Autowired
  */
 @RestController
+@RequestMapping(value = "${api.version}")
 public class RestaurantController {
     RestaurantService service;
 

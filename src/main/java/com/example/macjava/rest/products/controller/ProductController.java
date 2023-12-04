@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(value = "${api.version}")
 @Tag(name = "Productos", description = "Endpoint de Productos de nuestra tienda")
 public class ProductController {
     ProductService service;

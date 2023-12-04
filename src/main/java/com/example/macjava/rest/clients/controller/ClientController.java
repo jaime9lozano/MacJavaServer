@@ -29,6 +29,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
 
 @RestController
+@RequestMapping(value = "${api.version}/clientes")
 @PreAuthorize("hasRole('USER')")
 @Tag(name = "Clientes", description = "Endpoint de Clientes de nuestra tienda")
 public class ClientController {
@@ -55,7 +56,7 @@ public class ClientController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Pagina de clientes"),
     })
-    @GetMapping("/clientes")
+    @GetMapping()
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<PageResponse<Client>> getProducts(
             @RequestParam(required = false) Optional<String> dni,
@@ -84,7 +85,7 @@ public class ClientController {
             @ApiResponse(responseCode = "200", description = "Cliente"),
             @ApiResponse(responseCode = "404", description = "No se encuentra el cliente")
     })
-    @GetMapping("/clientes/{id}")
+    @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Client> getProduct(@PathVariable UUID id) {
         return ResponseEntity.ok(service.findById(id));
@@ -95,7 +96,7 @@ public class ClientController {
             @ApiResponse(responseCode = "201", description = "Cliente creado"),
             @ApiResponse(responseCode = "400", description = "Error al crear el cliente")
     })
-    @PostMapping("/clientes")
+    @PostMapping()
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Client> createProduct(@Valid @RequestBody ClientdtoNew client)  {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(client));
@@ -110,7 +111,7 @@ public class ClientController {
             @ApiResponse(responseCode = "400", description = "Error al actualizar el cliente"),
             @ApiResponse(responseCode = "404", description = "No se encuentra el cliente")
     })
-    @PutMapping("/clientes/{id}")
+    @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Client> updateProduct(@PathVariable UUID id, @Valid @RequestBody ClientdtoUpdated client) {
         return ResponseEntity.ok(service.update(id,client));
@@ -123,7 +124,7 @@ public class ClientController {
             @ApiResponse(responseCode = "204", description = "Cliente eliminado"),
             @ApiResponse(responseCode = "404", description = "No se encuentra el cliente")
     })
-    @DeleteMapping("/clientes/{id}")
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteProduct(@PathVariable UUID id) {
         service.deleteById(id);

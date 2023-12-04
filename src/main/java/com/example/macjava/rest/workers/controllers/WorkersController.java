@@ -30,7 +30,7 @@ import java.util.*;
 
 @RestController
 @Slf4j
-@RequestMapping(value = "/workers")
+@RequestMapping(value = "${api.version}/workers")
 @PreAuthorize("hasRole('ADMIN')")
 public class WorkersController {
     private final WorkersServiceImpl workersService;

@@ -33,7 +33,7 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @PreAuthorize("hasRole('USER')")
-@RequestMapping(value = "/positions")
+@RequestMapping(value = "${api.version}/positions")
 @Tag(name = "Puestos", description = "Endpoint de Puestos de nuestra tienda")
 public class PositionController {
     private final PositionServiceImpl positionService;
